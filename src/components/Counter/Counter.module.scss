@@ -1,0 +1,52 @@
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.controls {
+  padding: 10px;
+  background-color: #d7d7d7;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+
+  border-radius: 10px;
+
+  button {
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 25px;
+
+    padding: 40px;
+    background-color: #ffc371;
+    color: black;
+
+    cursor: pointer;
+
+    transition: all .2s;
+
+    -webkit-box-shadow: 0 4px 0 0 rgba(0,0,0,0.63);
+    -moz-box-shadow: 0 4px 0 0 rgba(0,0,0,0.63);
+    box-shadow: 0 4px 0 0 rgba(0,0,0,0.63);
+  }
+
+  button:first-child {
+    margin-right: 10px;
+  }
+
+  button:hover {
+    background-color: #ffaa33;
+    color: black;
+
+    -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.63);
+    -moz-box-shadow: 0 0 0 0 rgba(0,0,0,0.63);
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.63);
+
+    transition: all .5s;
+  }
+}
