@@ -1,13 +1,13 @@
 import React from "react";
 
-import { TextPrinting, View } from "./components";
+import { Counter, View } from "./components";
 
 import "./App.style.scss";
 
 function App() {
   return (
     <View>
-      <TextPrinting />
+      <Counter />
     </View>
   );
 }

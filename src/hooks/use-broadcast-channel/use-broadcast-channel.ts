@@ -38,5 +38,7 @@ export const useBroadcastChannel = <T>(nameChannel: string) => {
     return () => bc.removeEventListener("message", readMessage);
   }, [readMessage]);
 
+  useEffect(() => () => bc.close());
+
   return { postMessage, broadcastData };
 };
