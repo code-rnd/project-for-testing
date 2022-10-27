@@ -4,7 +4,7 @@ import { useLocalStorage, useStorageChannel } from "../../hooks";
 
 const COUNT = "count";
 export const Counter: FC = () => {
-  const { set, get } = useLocalStorage();
+  const { set, get, remove } = useLocalStorage();
   const { storageData } = useStorageChannel(COUNT);
 
   const handleAddCount = useCallback(() => {
@@ -18,6 +18,8 @@ export const Counter: FC = () => {
   }, [get, set]);
 
   useEffect(() => set(COUNT, 0), []);
+
+  useEffect(() => () => remove(COUNT), []);
 
   return (
     <div className={s.counter}>
