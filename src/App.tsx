@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { TextPrinting, View } from "./components";
+import {
+  Counter,
+  SymbolView,
+  TextPrinting,
+  View,
+  Controls,
+} from "./components";
+
+import { ThemesType } from "./types";
 
 import "./App.style.scss";
 
+const ThemesList: ThemesType[] = ["Symbol", "BroadcastChannel", ".onstorage"];
+
 function App() {
+  const [theme, setTheme] = useState<ThemesType>("Symbol");
+
   return (
     <View>
-      <TextPrinting />
+      <Controls onSelect={setTheme} list={ThemesList} activeControl={theme} />
+      {theme === "Symbol" && <SymbolView />}
+      {theme === "BroadcastChannel" && <TextPrinting />}
+      {theme === ".onstorage" && <Counter />}
     </View>
   );
 }
