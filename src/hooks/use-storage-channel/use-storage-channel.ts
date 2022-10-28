@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 /**
  * хук для работы с событием 'storage' (слушаю изменения локалсторедж в рамках одного домена);
- * тем самым, могу получать и синхронизировать актуальность данных между вкладками / окнами
+ * тем самым, могу получать и синхронизировать актуальность данных между вкладками / окнами.
  *
  * Важно: событие срабатывает на всех остальных объектах window,
  * где доступно хранилище, кроме того окна, которое его вызвало.
@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from "react";
  * пример использования хука:
  * const { storageData } = useStorageChannel("age");
  *
- * const age = storageData; - получаю данные в другом окне / вкладке
+ * const age = storageData; - получаю данные в другом окне / вкладке.
  */
 
 export const useStorageChannel = (keyName: string) => {

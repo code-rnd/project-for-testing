@@ -1,10 +1,14 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
 import s from "./TextPrinting.module.scss";
 import { useBroadcastChannel } from "../../hooks";
 
 export const TextPrinting: FC = () => {
   const { postMessage, broadcastData } = useBroadcastChannel<string>("print");
   const [value, setValue] = useState(broadcastData || "");
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.currentTarget.value);
+  }, []);
 
   useEffect(() => postMessage(value), [value]);
 
@@ -15,8 +19,8 @@ export const TextPrinting: FC = () => {
       </div>
       <input
         type="text"
-        value={broadcastData}
-        onChange={(e) => setValue(e.currentTarget.value)}
+        value={value}
+        onChange={handleChange}
         placeholder="_"
       />
     </div>
