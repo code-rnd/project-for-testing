@@ -15,7 +15,7 @@ export const TextPrinting: FC = () => {
   return (
     <div className={s.container}>
       <div className={s.display}>
-        {broadcastData || <span>placeholder</span>}
+        {broadcastData || <span>placeholder _</span>}
       </div>
       <input
         type="text"

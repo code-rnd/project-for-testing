@@ -12,8 +12,11 @@
 }
 
 .item {
+  position: relative;
   cursor: pointer;
   color: #ababab;
+
+  padding-bottom: 10px;
 
   font-size: 20px;
 
@@ -27,4 +30,14 @@
 .active, .item:hover {
   color: white;
   transition: all .3s;
+}
+
+.active:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 40%;
+  height: 1px;
+  background-color: rgba(225, 236, 255, 0.57);
 }
