@@ -12,6 +12,7 @@ export const Controls: FC<{
   activeControl: ThemesType;
 }> = ({ onSelect, list, activeControl }) => {
   const { get } = useHttp();
+
   const fetchData = async () => {
     const { data } = await get("https://jsonplaceholder.typicode.com/todos/1");
     console.log(data);
