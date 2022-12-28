@@ -4,3 +4,4 @@ export * from "./TextPrinting";
 export * from "./SymbolView";
 export * from "./Controls";
 export * from "./SettingArray";
+export * from "./RadioSegmented";

@@ -1,27 +1,15 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 
 import { ThemesType } from "../../types";
+import { cn } from "../../utils";
 
 import s from "./Controls.module.scss";
-import { cn } from "../../utils";
-import { useHttp } from "../../http";
 
 export const Controls: FC<{
   onSelect: (name: ThemesType) => void;
   list: ThemesType[];
   activeControl: ThemesType;
 }> = ({ onSelect, list, activeControl }) => {
-  const { get } = useHttp();
-
-  const fetchData = async () => {
-    const { data } = await get("https://jsonplaceholder.typicode.com/todos/1");
-    console.log(data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <div className={s.list}>
       {list.map((name, index) => (

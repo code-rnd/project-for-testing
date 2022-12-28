@@ -5,15 +5,13 @@ import {
   SymbolView,
   TextPrinting,
   View,
-  Controls,
   SettingArray,
+  RadioSegmented,
 } from "./components";
-
-import { ThemesType } from "./types";
 
 import "./App.style.scss";
 
-const ThemesList: ThemesType[] = [
+const ThemesList: string[] = [
   "Symbol",
   "BroadcastChannel",
   ".onstorage",
@@ -21,11 +19,16 @@ const ThemesList: ThemesType[] = [
 ];
 
 function App() {
-  const [theme, setTheme] = useState<ThemesType>("Symbol");
+  const [theme, setTheme] = useState("Symbol");
 
   return (
     <View>
-      <Controls onSelect={setTheme} list={ThemesList} activeControl={theme} />
+      <RadioSegmented
+        items={ThemesList}
+        activeItem={theme}
+        widthItem={100}
+        onSelect={setTheme}
+      />
       {theme === "Symbol" && <SymbolView />}
       {theme === "BroadcastChannel" && <TextPrinting />}
       {theme === ".onstorage" && <Counter />}

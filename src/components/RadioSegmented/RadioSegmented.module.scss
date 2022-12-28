@@ -1,0 +1,72 @@
+$transition: all .4s;
+$borderRadius: 4px;
+
+.container {
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+  right: 20px;
+}
+
+.list {
+  position: relative;
+  height: 36px;
+  width: max-content;
+
+  border-radius: $borderRadius;
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  background-color: rgba(131, 131, 131, 0.65);
+}
+
+.item {
+  cursor: pointer;
+
+  height: 30px;
+  padding: 6px;
+  box-sizing: border-box;
+
+  text-align: center;
+
+  position: relative;
+  z-index: 2;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+
+  color: rgba(0, 0, 0, 0.73);
+
+  border-radius: $borderRadius;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+}
+
+.isActive {
+  color: black;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+.animateBlock {
+  position: absolute;
+  z-index: 1;
+
+  border-radius: $borderRadius;
+
+  background-color: #fff;
+
+  transition: $transition;
+}
