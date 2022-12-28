@@ -6,15 +6,18 @@ import { cn } from "../../utils";
 
 import s from "./RadioSegmented.module.scss";
 
+export interface SegmentItem {
+  name: string;
+}
 export interface SegmentedProps {
-  items: string[];
+  items: SegmentItem[];
   /** Активный элемент */
-  activeItem: string;
+  activeItem: SegmentItem;
 
   /** Ширана элемента в массиве */
   widthItem?: number;
 
-  onSelect: (item: string) => void;
+  onSelect: (item: SegmentItem) => void;
 }
 
 export const RadioSegmented: FC<SegmentedProps> = (props) => {
@@ -37,8 +40,8 @@ export const RadioSegmented: FC<SegmentedProps> = (props) => {
   const listStyle: CSSProperties = { padding: PaddingList };
   const itemStyle: CSSProperties = { width: widthItem };
 
-  const handleSelect = (segment: string) => {
-    activeItem !== segment && onSelect(segment);
+  const handleSelect = (segment: SegmentItem) => {
+    activeItem.name !== segment.name && onSelect(segment);
   };
 
   return (
@@ -49,9 +52,9 @@ export const RadioSegmented: FC<SegmentedProps> = (props) => {
             onClick={() => handleSelect(item)}
             className={cn([s.item, item === activeItem && s.isActive])}
             style={itemStyle}
-            key={item}
+            key={item.name}
           >
-            {item}
+            {item.name}
           </div>
         ))}
         <div className={s.animateBlock} style={animateStyle} />

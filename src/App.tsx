@@ -9,30 +9,32 @@ import {
   RadioSegmented,
 } from "./components";
 
+import { SegmentItem } from "./components/RadioSegmented/RadioSegmented";
+
 import "./App.style.scss";
 
-const ThemesList: string[] = [
-  "Symbol",
-  "BroadcastChannel",
-  ".onstorage",
-  "map/set",
+const ThemesList: SegmentItem[] = [
+  { name: "Symbol" },
+  { name: "BroadcastChannel" },
+  { name: ".onstorage" },
+  { name: "map/set" },
 ];
 
 function App() {
-  const [theme, setTheme] = useState("Symbol");
+  const [theme, setTheme] = useState(ThemesList.at(0) as SegmentItem);
 
   return (
     <View>
       <RadioSegmented
         items={ThemesList}
         activeItem={theme}
-        widthItem={100}
+        widthItem={150}
         onSelect={setTheme}
       />
-      {theme === "Symbol" && <SymbolView />}
-      {theme === "BroadcastChannel" && <TextPrinting />}
-      {theme === ".onstorage" && <Counter />}
-      {theme === "map/set" && <SettingArray />}
+      {theme.name === "Symbol" && <SymbolView />}
+      {theme.name === "BroadcastChannel" && <TextPrinting />}
+      {theme.name === ".onstorage" && <Counter />}
+      {theme.name === "map/set" && <SettingArray />}
     </View>
   );
 }
