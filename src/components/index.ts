@@ -5,3 +5,5 @@ export * from "./SymbolView";
 export * from "./Controls";
 export * from "./SettingArray";
 export * from "./RadioSegmented";
+export * from "./MouseMove";
+export * from "./Gallery";

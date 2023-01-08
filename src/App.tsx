@@ -7,6 +7,8 @@ import {
   View,
   SettingArray,
   RadioSegmented,
+  MouseMove,
+  Gallery,
 } from "./components";
 
 import { SegmentItem } from "./components/RadioSegmented/RadioSegmented";
@@ -18,23 +20,27 @@ const ThemesList: SegmentItem[] = [
   { name: "BroadcastChannel" },
   { name: ".onstorage" },
   { name: "map/set" },
+  { name: "MouseMove" },
+  { name: "Gallery" },
 ];
 
 function App() {
-  const [theme, setTheme] = useState(ThemesList.at(0) as SegmentItem);
+  const [theme, setTheme] = useState(ThemesList.at(-1) as SegmentItem);
 
   return (
     <View>
       <RadioSegmented
         items={ThemesList}
         activeItem={theme}
-        widthItem={150}
+        widthItem={50}
         onSelect={setTheme}
       />
       {theme.name === "Symbol" && <SymbolView />}
       {theme.name === "BroadcastChannel" && <TextPrinting />}
       {theme.name === ".onstorage" && <Counter />}
       {theme.name === "map/set" && <SettingArray />}
+      {theme.name === "MouseMove" && <MouseMove />}
+      {theme.name === "Gallery" && <Gallery />}
     </View>
   );
 }

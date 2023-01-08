@@ -1,0 +1,22 @@
+$gap: 100px;
+
+.container {
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+}
+
+.item {
+  position: absolute;
+  cursor: pointer;
+  top: 500px;
+  left: 500px;
+
+  height: $gap;
+  width: $gap;
+
+  background-color: cornflowerblue;
+  box-shadow: 0 0 10px 0 black;
+  border-radius: 5px;
+}

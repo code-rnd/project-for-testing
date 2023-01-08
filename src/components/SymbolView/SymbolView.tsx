@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 
 import { objUpdate } from "./SymbolView.utils";
 import { id_1, initialUser } from "./SymbolView.const";
@@ -36,10 +36,6 @@ export const SymbolView: FC = () => {
   const handleReset = () => {
     setUser(initialUser);
   };
-
-  useEffect(() => {
-    console.log({ user, keys: Object.keys(user) });
-  }, [user]);
 
   return (
     <div className={s.counter}>
