@@ -36,11 +36,6 @@ export const useTouch = (props: UseTouchProps = initialState) => {
 
   const handleStart = useCallback(
     (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-      console.log(move.x, coords.x);
-      if (move.x !== coords.x) {
-        return;
-      }
-
       /** Координаты касания относительно нажатого елемента */
       const touchElX = (e as any).nativeEvent.layerX;
       const touchElY = (e as any).nativeEvent.layerY;
@@ -95,10 +90,6 @@ export const useTouch = (props: UseTouchProps = initialState) => {
 
   const handleEnd = useCallback(
     (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-      /** TODO: Анимация движения */
-      setStyle({ transition: "all .4s" });
-      setIsMove(false);
-
       if (isMove && (onSwipeLeft || onSwipeRight)) {
         const viewWidth = (e as any).view.innerWidth;
         const centerViewCoords = viewWidth / 2;
@@ -122,6 +113,10 @@ export const useTouch = (props: UseTouchProps = initialState) => {
         /** Если свайп был, но недостаточно сильный - возвращаю элемент обратно на место */
         setMove(coords);
       }
+
+      /** TODO: Анимация движения */
+      setStyle({ transition: "all .4s" });
+      setIsMove(false);
     },
     [onSwipeLeft, onSwipeRight, start, isMove, offset, coords]
   );
