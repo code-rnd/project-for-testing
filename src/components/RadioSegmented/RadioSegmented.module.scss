@@ -1,4 +1,4 @@
-$transition: all .4s;
+$transition: all .2s;
 $borderRadius: 4px;
 
 .container {
@@ -7,6 +7,10 @@ $borderRadius: 4px;
   top: 20px;
   left: 20px;
   right: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .list {

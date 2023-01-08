@@ -12,8 +12,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  height: 400px;
-  width: 190px;
+  padding: 10px;
+
+  overflow: hidden;
+
+  height: 500px;
+  width: 300px;
 
   background-color: white;
   box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.73);
@@ -21,10 +25,32 @@
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  flex-direction: column;
 
   -moz-user-select: none;
   user-select: none;
 
-  font-size: 100px;
+  img {
+    width: 100%;
+  }
 }
+
+.description {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  font-size: 30px;
+}
+
+.name {
+  font-weight: bold;
+}
+.age {
+}
+

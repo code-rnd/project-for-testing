@@ -16,10 +16,10 @@ import { SegmentItem } from "./components/RadioSegmented/RadioSegmented";
 import "./App.style.scss";
 
 const ThemesList: SegmentItem[] = [
-  { name: "Symbol" },
-  { name: "BroadcastChannel" },
-  { name: ".onstorage" },
-  { name: "map/set" },
+  // { name: "Symbol" },
+  // { name: "BroadcastChannel" },
+  // { name: ".onstorage" },
+  // { name: "map/set" },
   { name: "MouseMove" },
   { name: "Gallery" },
 ];
@@ -32,7 +32,7 @@ function App() {
       <RadioSegmented
         items={ThemesList}
         activeItem={theme}
-        widthItem={50}
+        widthItem={150}
         onSelect={setTheme}
       />
       {theme.name === "Symbol" && <SymbolView />}
