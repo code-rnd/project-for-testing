@@ -31,29 +31,22 @@ export const useTouch = (props: UseTouchProps = initialState) => {
   const [move, setMove] = useState(coords);
   const [isMove, setIsMove] = useState(false);
 
-  const [offset, setOffset] = useState(coords);
   const [style, setStyle] = useState<CSSProperties>({});
 
   const handleStart = useCallback(
     (e: MouseEvent<HTMLDivElement> | TouchEvent<HTMLDivElement>) => {
-      /** Координаты касания относительно нажатого елемента */
-      const touchElX = (e as any).nativeEvent.layerX;
-      const touchElY = (e as any).nativeEvent.layerY;
-
       /** Координаты касания относительно всего дисплея */
       const touchX =
         (e as MouseEvent).pageX || (e as TouchEvent).touches[0].pageX;
       const touchY =
         (e as MouseEvent).pageY || (e as TouchEvent).touches[0].pageY;
 
-      /** Позиция элемента в момент начала его движения */
-      setOffset({
-        x: e.currentTarget.offsetLeft,
-        y: e.currentTarget.offsetTop,
-      });
+      /** Координаты касания относительно нажатого елемента */
+      const touchElX = (e as any).nativeEvent.layerX;
+      const touchElY = (e as any).nativeEvent.layerY;
 
       /** TODO: Анимация движения */
-      setStyle({ transition: "none" });
+      setStyle({ transition: "left 0s" });
 
       if (isHorisontalOnly) {
         setStart({ x: touchElX, y: touchY - touchElY });
@@ -74,7 +67,8 @@ export const useTouch = (props: UseTouchProps = initialState) => {
         const touchY =
           (e as MouseEvent)?.pageY || (e as TouchEvent)?.touches?.[0]?.pageY;
 
-        /** Дельта смещения нужна для корректного перемещения элемента, с касанием в любой его области */
+        /** Дельта смещения нужна для корректного перемещения элемента,
+         *  с касанием в любой его области */
         const deltaX = touchX - start.x;
         const deltaY = touchY - start.y;
 
@@ -115,10 +109,10 @@ export const useTouch = (props: UseTouchProps = initialState) => {
       }
 
       /** TODO: Анимация движения */
-      setStyle({ transition: "all .4s" });
+      setStyle({ transition: "left .4s" });
       setIsMove(false);
     },
-    [onSwipeLeft, onSwipeRight, start, isMove, offset, coords]
+    [onSwipeLeft, onSwipeRight, start, isMove, coords]
   );
 
   return {

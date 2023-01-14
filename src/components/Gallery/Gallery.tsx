@@ -1,4 +1,11 @@
-import { CSSProperties, FC, useMemo, useState } from "react";
+import {
+  CSSProperties,
+  FC,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { useTouch } from "../../hooks";
 
@@ -7,48 +14,70 @@ import s from "./Gallery.module.scss";
 const cards = [
   {
     id: 1,
-    src: "https://images.generated.photos/J5N2J8lIeBqGe5lZPyBzW4a-MNVktw1VCdyg2Om0dYo/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy90cmFu/c3BhcmVudF92My92/M18wOTgwMDAxLnBu/Zw.png",
-    name: "Ann",
+    src: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Sandra_Bullock_%289192365016%29_%28cropped%29.jpg",
+    name: "Sandra",
     age: 28,
   },
   {
     id: 2,
-    src: "https://images.generated.photos/s8tNg_trDe86I_kP2Nz46X30fv_stzCEU_taMyw4Wzw/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy90cmFu/c3BhcmVudF92My92/M18wNDA3NDA3LnBu/Zw.png",
-    name: "Megan",
+    src: "https://assets.vogue.ru/photos/5dc54983548ac50008c4cafc/2:3/w_2560%2Cc_limit/b9e69a4742d190029239d12265a5e3da.jpg",
+    name: "Julia",
     age: 23,
   },
   {
     id: 3,
-    src: "https://images.generated.photos/DwE2iSjGwsSrPgW8NOtp4BhGo6CiNhFPpTK-JCMxadY/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy90cmFu/c3BhcmVudF92My92/M18wMzEyMzIzLnBu/Zw.png",
-    name: "Oshu",
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Angelina_Jolie_2_June_2014_%28cropped%29.jpg/800px-Angelina_Jolie_2_June_2014_%28cropped%29.jpg",
+    name: "Angelina",
     age: 29,
   },
   {
     id: 4,
-    src: "https://images.generated.photos/J5N2J8lIeBqGe5lZPyBzW4a-MNVktw1VCdyg2Om0dYo/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy90cmFu/c3BhcmVudF92My92/M18wOTgwMDAxLnBu/Zw.png",
-    name: "Karla",
+    src: "https://www.gilan.com/wp-content/uploads/2020/09/penelope_cruz-1.jpg",
+    name: "Penelope",
     age: 31,
   },
   {
     id: 5,
-    src: "https://images.generated.photos/s8tNg_trDe86I_kP2Nz46X30fv_stzCEU_taMyw4Wzw/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy90cmFu/c3BhcmVudF92My92/M18wNDA3NDA3LnBu/Zw.png",
-    name: "Karmen",
+    src: "https://flxt.tmsimg.com/assets/283805_v9_ba.jpg",
+    name: "Megan",
     age: 25,
   },
   {
     id: 6,
-    src: "https://images.generated.photos/DwE2iSjGwsSrPgW8NOtp4BhGo6CiNhFPpTK-JCMxadY/rs:fit:512:512/wm:0.95:sowe:18:18:0.33/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy90cmFu/c3BhcmVudF92My92/M18wMzEyMzIzLnBu/Zw.png",
+    src: "https://cdn.britannica.com/35/157835-050-0CD3A8A5/Jennifer-Lopez-2010.jpg",
     name: "Jenifer",
     age: 25,
   },
 ];
 
 export const Gallery: FC = () => {
+  const [list, setList] = useState(cards);
+  const len = list.length;
+
+  const first = list.at(0) as CardModel;
+  const second = list.at(1) as CardModel;
+
+  const timer = useRef<NodeJS.Timeout>();
+
+  const removeItem = useCallback((id: number) => {
+    timer.current = setTimeout(() => {
+      setList((prev) => prev.filter((item) => item.id !== id));
+    }, 200);
+
+    return () => clearTimeout(timer.current);
+  }, []);
+
   return (
     <div className={s.container}>
-      {cards.map((card) => (
-        <Card card={card} key={card.id} />
-      ))}
+      {len >= 2 && (
+        <>
+          <Card card={second} removeCard={removeItem} key={second.id} />
+          <Card card={first} removeCard={removeItem} key={first.id} />
+        </>
+      )}
+      {len === 1 && (
+        <Card card={first} removeCard={removeItem} key={first.id} />
+      )}
     </div>
   );
 };
@@ -61,19 +90,22 @@ interface CardModel {
 }
 interface CardProps {
   card: CardModel;
+  removeCard: (id: number) => void;
 }
 const Card: FC<CardProps> = (props) => {
-  const { card } = props;
+  const { card, removeCard } = props;
   const { id, age, src, name } = card;
 
   const [extraStyle, setExtraStyle] = useState<CSSProperties>({});
 
   const onSwipeLeft = () => {
-    setExtraStyle({ left: -150 + "%", transition: "all .8s" });
+    setExtraStyle({ left: -150 + "%", transition: "left .8s" });
+    removeCard(id);
   };
 
   const onSwipeRight = () => {
-    setExtraStyle({ left: 150 + "%", transition: "all .8s" });
+    setExtraStyle({ left: 150 + "%", transition: "left .8s" });
+    removeCard(id);
   };
 
   const { useStart, useMove, useEnd, move, ...meta } = useTouch({
@@ -103,12 +135,11 @@ const Card: FC<CardProps> = (props) => {
       onTouchEnd={useEnd}
       style={{ ...style, ...extraStyle }}
       className={s.card}
-      key={id}
     >
       <img src={src} alt="photo random human" />
       <div className={s.description}>
         <div className={s.name}>{name}</div>
-        <div className={s.age}>{age}</div>
+        <div>{age}</div>
       </div>
     </div>
   );

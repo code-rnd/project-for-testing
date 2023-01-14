@@ -12,16 +12,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  padding: 10px;
-
-  overflow: hidden;
-
-  height: 500px;
-  width: 300px;
-
-  background-color: white;
-  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.73);
-  border-radius: 5px;
+  height: 600px;
+  width: 360px;
 
   display: flex;
   align-items: center;
@@ -32,6 +24,7 @@
   user-select: none;
 
   img {
+    box-sizing: border-box;
     width: 100%;
   }
 }
@@ -45,12 +38,13 @@
   justify-content: flex-start;
   gap: 10px;
 
+  background-color: white;
+
+  box-sizing: border-box;
+  padding: 10px;
   font-size: 30px;
 }
 
 .name {
   font-weight: bold;
 }
-.age {
-}
-
