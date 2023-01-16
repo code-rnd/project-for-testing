@@ -7,3 +7,5 @@ export * from "./SettingArray";
 export * from "./RadioSegmented";
 export * from "./MouseMove";
 export * from "./Gallery";
+export * from "./Canvas";
+export * from "./VirtualList";

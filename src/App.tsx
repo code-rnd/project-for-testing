@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 import {
   Counter,
@@ -9,6 +9,9 @@ import {
   RadioSegmented,
   MouseMove,
   Gallery,
+  VirtualList,
+  initialList,
+  Element,
 } from "./components";
 
 import { SegmentItem } from "./components/RadioSegmented/RadioSegmented";
@@ -20,8 +23,9 @@ const ThemesList: SegmentItem[] = [
   // { name: "BroadcastChannel" },
   // { name: ".onstorage" },
   // { name: "map/set" },
-  { name: "MouseMove" },
-  { name: "Gallery" },
+  // { name: "MouseMove" },
+  // { name: "Gallery" },
+  { name: "virtual-list" },
 ];
 
 function App() {
@@ -35,12 +39,20 @@ function App() {
         widthItem={150}
         onSelect={setTheme}
       />
+
       {theme.name === "Symbol" && <SymbolView />}
       {theme.name === "BroadcastChannel" && <TextPrinting />}
       {theme.name === ".onstorage" && <Counter />}
       {theme.name === "map/set" && <SettingArray />}
       {theme.name === "MouseMove" && <MouseMove />}
       {theme.name === "Gallery" && <Gallery />}
+      {theme.name === "virtual-list" && (
+        <VirtualList
+          list={initialList}
+          renderItem={Element as FC}
+          heightItem={20}
+        />
+      )}
     </View>
   );
 }
