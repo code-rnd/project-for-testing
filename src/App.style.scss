@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  background-color: #18222D;
 }
 
 html,
@@ -10,11 +11,12 @@ body,
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: #18222D;
+
 
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222431;
 
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }

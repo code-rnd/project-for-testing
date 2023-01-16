@@ -2,29 +2,29 @@ import React, { FC, useState } from "react";
 
 import {
   Counter,
+  Gallery,
+  MouseMove,
+  RadioSegmented,
+  SettingArray,
   SymbolView,
   TextPrinting,
   View,
-  SettingArray,
-  RadioSegmented,
-  MouseMove,
-  Gallery,
   VirtualList,
-  initialList,
-  Element,
+  VirtualListItem,
 } from "./components";
+import { InitialList } from "./components/VirtualList/VirtualList.const";
 
 import { SegmentItem } from "./components/RadioSegmented/RadioSegmented";
 
 import "./App.style.scss";
 
 const ThemesList: SegmentItem[] = [
-  // { name: "Symbol" },
-  // { name: "BroadcastChannel" },
-  // { name: ".onstorage" },
-  // { name: "map/set" },
-  // { name: "MouseMove" },
-  // { name: "Gallery" },
+  { name: "Symbol" },
+  { name: "BroadcastChannel" },
+  { name: ".onstorage" },
+  { name: "map/set" },
+  { name: "MouseMove" },
+  { name: "Gallery" },
   { name: "virtual-list" },
 ];
 
@@ -48,9 +48,9 @@ function App() {
       {theme.name === "Gallery" && <Gallery />}
       {theme.name === "virtual-list" && (
         <VirtualList
-          list={initialList}
-          renderItem={Element as FC}
-          heightItem={20}
+          list={InitialList}
+          renderItem={VirtualListItem as FC}
+          heightItem={55}
         />
       )}
     </View>

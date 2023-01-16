@@ -1,0 +1,133 @@
+$gap: 5px;
+$iconSize: 48px;
+
+.container {
+  position: relative;
+  cursor: pointer;
+
+  height: 55px;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: $iconSize 1fr max-content max-content;
+  grid-template-rows: 1fr 1fr;
+
+  padding-right: 10px;
+
+  user-select: none;
+
+  background-color: #18222D;
+  transition: all .1s;
+
+  &:active {
+    transition: all .1s;
+    background-color: #3E6A97;
+    z-index: 1;
+
+    .lastMessage, .lastDateTime {
+      color: white;
+    }
+  }
+
+  &:not(:last-child):after {
+    position: absolute;
+    content: "";
+    top: -1px;
+    right: 0;
+    width: calc(100% - 48px - 10px);
+    height: 1px;
+    background-color: #213040;
+    z-index: 0;
+  }
+}
+
+.icon {
+  position: relative;
+  height: $iconSize;
+  width: $iconSize;
+
+  border-radius: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 20px;
+
+  box-sizing: border-box;
+
+  grid-column: 1;
+  grid-row: 1 / 3;
+  place-self: center;
+
+  .isOnline {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    height: 7px;
+    width: 7px;
+
+    border-radius: 25px;
+
+    border: 2px solid #18222D;
+    background-color: #2EA6FF;
+  }
+}
+
+
+
+.fullName {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-left: 10px;
+
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+}
+
+.lastMessage {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding-left: 10px;
+
+  font-size: 13px;
+  font-weight: normal;
+  color: #788697;
+}
+
+.status {
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: $gap * 2;
+    right: $gap;
+
+    &:not(:first-child){
+      right: $gap * 2;
+    }
+  }
+}
+
+.lastDateTime {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding: $gap * 1.5 0;
+  padding-right: $gap * 1.5;
+
+  grid-column: 4;
+  grid-row: 1 / 3;
+
+  font-size: 12px;
+  font-weight: normal;
+  color: #788697;
+}

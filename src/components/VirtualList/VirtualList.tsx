@@ -8,37 +8,16 @@ import React, {
   useState,
   UIEvent,
 } from "react";
+
 import { cn } from "../../utils";
 
 import s from "./VirtualList.module.scss";
 
-export interface InitialListItem {
-  id: number;
-  name: string;
-}
-export const initialList: InitialListItem[] = Array.from(
-  { length: 100_000 },
-  (_, x) => ({
-    id: x + 1,
-    name: "name_" + (x + 1),
-  })
-);
-
-export const Element: FC<InitialListItem> = (props) => {
-  const { name, id } = props;
-
-  return (
-    <div style={{ height: 20 }} key={id}>
-      {name}
-    </div>
-  );
-};
-
-interface ItemModel<T extends { id: number } = { id: number }> {
+interface VirtualListModel<T extends { id: number } = { id: number }> {
   id: number;
 }
 
-interface ListModel<T extends ItemModel = ItemModel> {
+interface VirtualListProps<T extends VirtualListModel = VirtualListModel> {
   list: T[];
   /** Элемент списка */
   renderItem: FC<T>;
@@ -46,13 +25,22 @@ interface ListModel<T extends ItemModel = ItemModel> {
   heightItem: number;
   /** Дельта элементов, для рендера вне видимости "до и после" */
   amount?: number;
+  isVirtual?: boolean;
 
   classnames?: string;
   style?: CSSProperties;
 }
 
-export const VirtualList: FC<ListModel> = (props) => {
-  const { list, renderItem, heightItem, amount = 5, classnames, style } = props;
+export const VirtualList: FC<VirtualListProps> = (props) => {
+  const {
+    list,
+    renderItem,
+    heightItem,
+    amount = 5,
+    isVirtual = true,
+    classnames,
+    style,
+  } = props;
   const ref = useRef<HTMLDivElement | null>(null);
 
   const [viewHeight, setViewHeight] = useState(0);
@@ -83,12 +71,14 @@ export const VirtualList: FC<ListModel> = (props) => {
 
   const onScroll = useCallback(
     (e: UIEvent<HTMLDivElement>) => {
+      if (!isVirtual) {
+        return;
+      }
       const scrollTop = e.currentTarget.scrollTop;
 
       const countHiddenItemsTop = Math.round(scrollTop / heightItem);
       const countHiddenItemsBottom = countHiddenItemsTop + showCountItems;
 
-      console.log(countHiddenItemsTop, amount);
       /** TODO: Косяк в конце расчетов */
       const start =
         countHiddenItemsTop > amount ? countHiddenItemsTop - amount : 0;
@@ -102,7 +92,7 @@ export const VirtualList: FC<ListModel> = (props) => {
         end >= listLenght ? list[listLenght - 1].id - 1 : list[end].id
       );
     },
-    [heightItem, showCountItems, amount, listLenght]
+    [heightItem, showCountItems, amount, listLenght, isVirtual]
   );
 
   const renderList = useMemo(
@@ -122,9 +112,10 @@ export const VirtualList: FC<ListModel> = (props) => {
       style={style}
       onScroll={onScroll}
     >
-      <div className={s.up} style={{ height: heightUp }} />
-      {renderList.map(renderItem)}
-      <div className={s.down} style={{ height: heightDown }} />
+      {isVirtual && <div className={s.up} style={{ height: heightUp }} />}
+      {!isVirtual && list.map(renderItem)}
+      {isVirtual && renderList.map(renderItem)}
+      {isVirtual && <div className={s.down} style={{ height: heightDown }} />}
     </div>
   );
 };
