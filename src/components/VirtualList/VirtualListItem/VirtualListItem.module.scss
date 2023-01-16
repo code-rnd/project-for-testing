@@ -34,7 +34,7 @@ $iconSize: 48px;
     content: "";
     top: -1px;
     right: 0;
-    width: calc(100% - 48px - 10px);
+    width: calc(100% - 48px - 20px);
     height: 1px;
     background-color: #213040;
     z-index: 0;
@@ -47,6 +47,7 @@ $iconSize: 48px;
   width: $iconSize;
 
   border-radius: 50px;
+  margin-left: 10px;
 
   display: flex;
   align-items: center;
@@ -83,7 +84,7 @@ $iconSize: 48px;
   align-items: center;
   justify-content: flex-start;
 
-  padding-left: 10px;
+  padding-left: 20px;
 
   font-size: 14px;
   font-weight: 400;
@@ -95,7 +96,7 @@ $iconSize: 48px;
   align-items: flex-start;
   justify-content: flex-start;
 
-  padding-left: 10px;
+  padding-left: 20px;
 
   font-size: 13px;
   font-weight: normal;
