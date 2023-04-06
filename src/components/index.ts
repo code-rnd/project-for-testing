@@ -9,3 +9,4 @@ export * from "./MouseMove";
 export * from "./Gallery";
 export * from "./Canvas";
 export * from "./VirtualList";
+export * from "./Notifications";

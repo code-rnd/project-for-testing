@@ -4,6 +4,7 @@ import {
   Counter,
   Gallery,
   MouseMove,
+  Notifications,
   RadioSegmented,
   SettingArray,
   SymbolView,
@@ -13,7 +14,7 @@ import {
   VirtualListItem,
 } from "./components";
 import { InitialList } from "./components/VirtualList/VirtualList.const";
-
+import { NotificationsList } from "./components/Notifications/Notifications.const";
 import { SegmentItem } from "./components/RadioSegmented/RadioSegmented";
 
 import "./App.style.scss";
@@ -27,33 +28,35 @@ const ThemesList: SegmentItem[] = [
   { name: "Gallery" },
   { name: "virtual-list" },
 ];
-
 function App() {
   const [theme, setTheme] = useState(ThemesList.at(-1) as SegmentItem);
 
   return (
-    <View>
-      <RadioSegmented
-        items={ThemesList}
-        activeItem={theme}
-        widthItem={150}
-        onSelect={setTheme}
-      />
+    <>
+      <View>
+        {/*<RadioSegmented*/}
+        {/*  items={ThemesList}*/}
+        {/*  activeItem={theme}*/}
+        {/*  widthItem={150}*/}
+        {/*  onSelect={setTheme}*/}
+        {/*/>*/}
 
-      {theme.name === "Symbol" && <SymbolView />}
-      {theme.name === "BroadcastChannel" && <TextPrinting />}
-      {theme.name === ".onstorage" && <Counter />}
-      {theme.name === "map/set" && <SettingArray />}
-      {theme.name === "MouseMove" && <MouseMove />}
-      {theme.name === "Gallery" && <Gallery />}
-      {theme.name === "virtual-list" && (
-        <VirtualList
-          list={InitialList}
-          renderItem={VirtualListItem as FC}
-          heightItem={55}
-        />
-      )}
-    </View>
+        {/*{theme.name === "Symbol" && <SymbolView />}*/}
+        {/*{theme.name === "BroadcastChannel" && <TextPrinting />}*/}
+        {/*{theme.name === ".onstorage" && <Counter />}*/}
+        {/*{theme.name === "map/set" && <SettingArray />}*/}
+        {/*{theme.name === "MouseMove" && <MouseMove />}*/}
+        {/*{theme.name === "Gallery" && <Gallery />}*/}
+        {/*{theme.name === "virtual-list" && (*/}
+        {/*  <VirtualList*/}
+        {/*    list={InitialList}*/}
+        {/*    renderItem={VirtualListItem as FC}*/}
+        {/*    heightItem={55}*/}
+        {/*  />*/}
+        {/*)}*/}
+      </View>
+      <Notifications items={NotificationsList} />
+    </>
   );
 }
 
